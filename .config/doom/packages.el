@@ -5,3 +5,5 @@
 (package! evil-tutor)
 ;; Best theme ever
 (package! catppuccin-theme)
+;; AI
+(package! gptel)

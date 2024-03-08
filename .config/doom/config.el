@@ -17,7 +17,7 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 
-(setq doom-font (font-spec :family "Iosevka SS04" :size 16 :weight 'regular)
+(setq doom-font (font-spec :family "GeistMono Nerd Font" :size 16 :weight 'regular)
       doom-variable-pitch-font (font-spec :family "Hack Nerd Font" :size 16))
 
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
@@ -45,7 +45,7 @@
 (add-to-list 'default-frame-alist '(undecorated-round . t))
 (add-to-list 'default-frame-alist '(alpha . 94))
 
-;; GO stuff
+;; Start GO stuff
 ;; gofumpt >> gofmt
 (after! lsp-mode
   (setq lsp-go-use-gofumpt t)
@@ -98,6 +98,18 @@
 
 ;; configure dap-mode
 (setq dap-auto-configure-features '(locals breakpoints))
+
+;; configure gptel
+(use-package! gptel
+  :config
+  (setq! gptel-default-mode 'org-mode))
+
+(setq-default
+ gptel-model "mistral:latest"
+ gptel-backend (gptel-make-ollama "Ollama"
+                 :host "192.168.0.170:11434"
+                 :stream t
+                 :models '("mistral:latest")))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
