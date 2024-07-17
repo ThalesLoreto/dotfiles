@@ -40,7 +40,7 @@
 
        :editor
        (evil +everywhere)  ; come to the dark side, we have cookies
-       file-templates      ; auto-snippets for empty files
+       ;;file-templates    ; auto-snippets for empty files
        fold                ; (nigh) universal code folding
        (format +onsave)    ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
@@ -53,8 +53,7 @@
        ;;word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
-       dired
-                                        ; making dired pretty [functional]
+       dired               ; making dired pretty [functional]
        electric            ; smarter, keyword-based electric-indent
        ;;ibuffer           ; interactive buffer management
        undo                ; persistent, smarter undo for your inevitable mistakes
@@ -91,7 +90,7 @@
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb               ; creating color strings
        ;;taskrunner        ; taskrunner for all your projects
-       ;;terraform         ; infrastructure as code
+       terraform           ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
        tree-sitter         ; syntax and parsing, sitting in a tree...
        ;;upload            ; map local to remote projects via ssh/ftp
@@ -112,7 +111,9 @@
        ;;data              ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
        ;;dhall
-       ;;elixir            ; erlang done right
+       (elixir
+        +lsp
+        +tree-sitter)      ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp          ; drown in parentheses
        ;;erlang            ; an elegant language for a more civilized age
@@ -125,7 +126,7 @@
        ;;gdscript          ; the language you waited for
        (go +lsp
            +tree-sitter)   ; the hipster dialect
-       ;;(graphql +lsp)    ; Give queries a REST
+       (graphql +lsp)      ; Give queries a REST
        ;;(haskell +lsp)    ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ; a language you can depend on
@@ -142,7 +143,7 @@
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       org                 ; organize your plain life in plain text
+       (org +pretty)                 ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
@@ -159,13 +160,17 @@
        (rust +lsp)         ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        ;;(scheme +guile)   ; a fully conniving family of lisps
-       ;; sh               ; she sells {ba,z,fi}sh shells on the C xor
+       sh                  ; she sells {ba,z,fi}sh shells on the C xor
        ;;sml
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
-       ;;web               ; the tubes
-       yaml                ; JSON, but readable
+       (web
+        +lsp
+        +tree-sitter)      ; the tubes
+       (yaml
+        +lsp
+        +tree-sitter)      ; JSON, but readable
        ;;zig               ; C, but simpler
 
        :email

@@ -5,6 +5,6 @@ decorations = "None"
 opacity = 0.94
 
 [font]
-normal = { family = "IosevkaTerm Nerd Font", style = "Light" }
-bold = { family = "IosevkaTerm Nerd Font", style = "SemiBold" }
+normal = { family = "GeistMono Nerd Font", style = "Light" }
+bold = { family = "GeistMono Nerd Font", style = "SemiBold" }
 size = 16.0
