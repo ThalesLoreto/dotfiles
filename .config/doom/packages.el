@@ -7,3 +7,6 @@
 (package! catppuccin-theme)
 ;; AI
 (package! gptel)
+;; code buddy
+(package! copilot
+  :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))

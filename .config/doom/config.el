@@ -99,17 +99,33 @@
 ;; configure dap-mode
 (setq dap-auto-configure-features '(locals breakpoints))
 
-;; configure gptel
-(use-package! gptel
+;; treemacs settings
+(use-package! treemacs
   :config
-  (setq! gptel-default-mode 'org-mode))
+  (setq treemacs-position 'right
+        treemacs-show-hidden-files t))
 
-(setq-default
- gptel-model "mistral:latest"
- gptel-backend (gptel-make-ollama "Ollama"
-                 :host "192.168.0.170:11434"
-                 :stream t
-                 :models '("mistral:latest")))
+;; Copilot configs
+;; accept completion from copilot and fallback to company
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
+
+;; ;; configure gptel
+;; (use-package! gptel
+;;   :config
+;;   (setq! gptel-default-mode 'org-mode))
+
+;; (setq-default
+;;  gptel-model "mistral:latest"
+;;  gptel-backend (gptel-make-ollama "Ollama"
+;;                  :host "192.168.0.170:11434"
+;;                  :stream t
+;;                  :models '("mistral:latest")))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
