@@ -47,14 +47,29 @@
 
 ;; Start GO stuff
 ;; gofumpt >> gofmt
-(after! lsp-mode
-  (setq lsp-go-use-gofumpt t)
-  (setq lsp-go-analyses '((fieldalignment . t)
-                          (nilness . t)
-                          (shadow . t)
-                          (unusedparams . t)
-                          (useany . t)
-                          (unusedvariable . t))))
+(after! go-mode
+  (if (and (modulep! :lang go +lsp) (executable-find "gofumpt"))
+      (setq lsp-go-use-gofumpt t)
+    (mssage "gofumpt not installed")))
+
+(defun me/projectile-ignore-projects (project-root)
+  (or (file-remote-p project-root)
+      (doom-project-ignored-p project-root)
+      (string-match-p "^/nix/store" project-root)
+      (string-match-p "/node_modules/" project-root)
+      (string-match-p "go/pkg/mod" project-root)))
+
+(after! projectile
+  (setq projectile-ignored-project-function #'me/projectile-ignore-projects))
+
+;; (after! lsp-mode
+;;   (setq lsp-go-use-gofumpt t)
+;;   (setq lsp-go-analyses '((fieldalignment . t)
+;;                           (nilness . t)
+;;                           (shadow . t)
+;;                           (unusedparams . t)
+;;                           (useany . t)
+;;                           (unusedvariable . t))))
 
 ;; Organize imports on save
 (add-hook 'go-mode-hook #'lsp-deferred)
