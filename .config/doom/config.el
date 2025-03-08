@@ -17,7 +17,7 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 
-(setq doom-font (font-spec :family "GeistMono Nerd Font" :size 16 :weight 'light)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16 :weight 'regular)
       doom-variable-pitch-font (font-spec :family "GeistMono Nerd Font" :size 16))
 
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
@@ -43,7 +43,7 @@
 
 ;; Remove the top bar Emacs App and set Opacity
 (add-to-list 'default-frame-alist '(undecorated-round . t))
-(add-to-list 'default-frame-alist '(alpha . 94))
+(add-to-list 'default-frame-alist '(alpha . 96))
 
 ;; Start GO stuff
 ;; gofumpt >> gofmt
@@ -120,15 +120,19 @@
   (setq treemacs-position 'right
         treemacs-show-hidden-files t))
 
+;; rust
+(after! rustic
+  (setq rustic-lsp-server 'rls))
+
 ;; Copilot configs
 ;; accept completion from copilot and fallback to company
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("<tab>" . 'copilot-accept-completion)
-              ("TAB" . 'copilot-accept-completion)
-              ("C-TAB" . 'copilot-accept-completion-by-word)
-              ("C-<tab>" . 'copilot-accept-completion-by-word)))
+;;(use-package! copilot
+;; :hook (prog-mode . copilot-mode)
+;; :bind (:map copilot-completion-map
+;;             ("<tab>" . 'copilot-accept-completion)
+;;             ("TAB" . 'copilot-accept-completion)
+;;             ("C-TAB" . 'copilot-accept-completion-by-word)
+;;             ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
 ;; ;; configure gptel
 ;; (use-package! gptel

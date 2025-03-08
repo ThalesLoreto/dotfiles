@@ -5,6 +5,6 @@ decorations = "None"
 opacity = 0.94
 
 [font]
-normal = { family = "GeistMono Nerd Font", style = "Light" }
+normal = { family = "JetBrainsMono Nerd Font", style = "Light" }
 bold = { family = "GeistMono Nerd Font", style = "SemiBold" }
 size = 16.0
