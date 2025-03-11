@@ -1,33 +1,11 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Thales Loreto"
       user-mail-address "tloreto.dev@gmail.com")
-
-;; Doom exposes five (optional) variables for controlling fonts in Doom:
-;;
-;; - `doom-font' -- the primary font to use
-;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
-;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;; - `doom-symbol-font' -- for symbols
-;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
-;;
-;; See 'C-h v doom-font' for documentation and more examples of what they
-;; accept. For example:
 
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16 :weight 'regular)
       doom-variable-pitch-font (font-spec :family "GeistMono Nerd Font" :size 16))
 
-;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
-;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
 (setq doom-theme 'catppuccin)
 (setq doom-themes-enable-bold 'nil)
 (setq doom-themes-enable-italic 'nil)
@@ -43,7 +21,7 @@
 
 ;; Remove the top bar Emacs App and set Opacity
 (add-to-list 'default-frame-alist '(undecorated-round . t))
-(add-to-list 'default-frame-alist '(alpha . 96))
+;; (add-to-list 'default-frame-alist '(alpha . 96))
 
 ;; Start GO stuff
 ;; gofumpt >> gofmt
@@ -52,15 +30,7 @@
       (setq lsp-go-use-gofumpt t)
     (mssage "gofumpt not installed")))
 
-(defun me/projectile-ignore-projects (project-root)
-  (or (file-remote-p project-root)
-      (doom-project-ignored-p project-root)
-      (string-match-p "^/nix/store" project-root)
-      (string-match-p "/node_modules/" project-root)
-      (string-match-p "go/pkg/mod" project-root)))
-
-(after! projectile
-  (setq projectile-ignored-project-function #'me/projectile-ignore-projects))
+(use-package! dap-dlv-go)
 
 ;; (after! lsp-mode
 ;;   (setq lsp-go-use-gofumpt t)
@@ -111,40 +81,6 @@
       :desc "dap breakpoint hit count"   "h" #'dap-breakpoint-hit-condition
       :desc "dap breakpoint log message" "l" #'dap-breakpoint-log-message)
 
-;; configure dap-mode
-(setq dap-auto-configure-features '(locals breakpoints))
-
-;; treemacs settings
-(use-package! treemacs
-  :config
-  (setq treemacs-position 'right
-        treemacs-show-hidden-files t))
-
-;; rust
-(after! rustic
-  (setq rustic-lsp-server 'rls))
-
-;; Copilot configs
-;; accept completion from copilot and fallback to company
-;;(use-package! copilot
-;; :hook (prog-mode . copilot-mode)
-;; :bind (:map copilot-completion-map
-;;             ("<tab>" . 'copilot-accept-completion)
-;;             ("TAB" . 'copilot-accept-completion)
-;;             ("C-TAB" . 'copilot-accept-completion-by-word)
-;;             ("C-<tab>" . 'copilot-accept-completion-by-word)))
-
-;; ;; configure gptel
-;; (use-package! gptel
-;;   :config
-;;   (setq! gptel-default-mode 'org-mode))
-
-;; (setq-default
-;;  gptel-model "mistral:latest"
-;;  gptel-backend (gptel-make-ollama "Ollama"
-;;                  :host "192.168.0.170:11434"
-;;                  :stream t
-;;                  :models '("mistral:latest")))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
