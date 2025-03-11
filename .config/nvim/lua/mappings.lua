@@ -24,3 +24,8 @@ map("n", "<Leader>dr", "<cmd>lua require'dap'.run_last()<CR>", { desc = "Debugge
 
 -- rustaceanvim
 map("n", "<Leader>dt", "<cmd>lua vim.cmd('RustLsp testables')<CR>", { desc = "Debugger testables" })
+
+-- Go
+map("n", "<Leader>gsj", "<cmd>GoTagAdd json<CR>", { desc = "add json struct tags" })
+map("n", "<Leader>gsy", "<cmd>GoTagAdd yaml<CR>", { desc = "add yaml struct tags" })
+map("n", "<Leader>gsm", "<cmd>GoMod tidy<CR>", { desc = "go mod tidy" })

@@ -2,7 +2,7 @@ local options = {
   formatters_by_ft = {
     lua = { "stylua" },
     rust = { "rustfmt" },
-    sql = { "sqlfmt" },
+    go = { "goimports", "gofumpt" },
     -- css = { "prettier" },
     -- html = { "prettier" },
   },
