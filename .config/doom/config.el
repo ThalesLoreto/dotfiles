@@ -47,8 +47,34 @@
 (defun lsp-go-install-save-hooks ()
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
-;; End GO stuff
-;;
+
+;; rust
+(after! rustic
+  (setq rustic-lsp-server 'rust-analyzer))
+(use-package! dap-cpptools)
+
+;; treemacs settings
+(use-package! treemacs
+  :config
+  (setq treemacs-position 'right
+        treemacs-show-hidden-files t))
+
+;; Projectile settings
+(defun me/projectile-ignore-projects (project-root)
+  (or (file-remote-p project-root)
+      (doom-project-ignored-p project-root)
+      (string-match-p "^/nix/store" project-root)
+      (string-match-p "/node_modules/" project-root)
+      (string-match-p "go/pkg/mod" project-root)))
+
+(after! projectile
+  (setq projectile-ignored-project-function #'me/projectile-ignore-projects))
+
+;; Dap settings
+(after! dap-mode
+  :custom
+  (setq dap-auto-configure-features '(sessions locals tooltip)))
+
 ;; dap-mode keybinding
 (map! :map dap-mode-map
       :leader
